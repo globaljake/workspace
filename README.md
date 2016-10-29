@@ -1,2 +1,3 @@
-# workspace
-my workspace
+# My Workspace
+Includes:
+- .bash_profile
