@@ -4,23 +4,23 @@ Includes:
 - atom-package-list.txt ( [?](https://discuss.atom.io/t/installed-packages-list-into-single-file/12227/2) )
 
 ### Configurations
-#### Terminal
+#### macOS Terminal
 ##### - Theme
 - [Solorized Dark](http://ethanschoonover.com/solarized)
 
-#### Atom
+#### [Atom](https://atom.io/)
 ##### - Theme
 - UI: One Dark
 - Syntax: One Dark
 
 ##### - Packages Settings
-- custom-title
+- [custom-title](https://atom.io/packages/custom-title)
   - Template
   ```js
     <%
-      var outerDirectory = projectPath ? projectPath.split('/')[projectPath.split('/').length-2] : '';
-      var directory = projectName || '';
-      var gitHead = gitHead || '';
-      print(outerDirectory + '-' + directory + '[ ' + gitHead + ' ]');
+      var limitedProjectPath = projectPath ? projectPath.split('/').slice(-2).join('/') : '';
+      var gitBranch = gitHead ? '[' + gitHead + ']' : '';
+      // ex. [master] projects/myProject
+      print(gitBranch + ' ' + limitedProjectPath);
     %>
   ```

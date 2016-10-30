@@ -1,9 +1,11 @@
 ## Aliases ##
 # Shortcuts #
-alias @='cd ~/@'
-alias temp='cd ~/@/temp'
 alias d="cd ~/Desktop"
-alias ts='cd ~/@/talkingstick'
+alias @='cd ~/@'
+alias me='cd ~/@/me'
+alias temp='cd ~/@/temp'
+alias tsi='cd ~/@/tsi'
+alias al='cd ~/@/tsi/projects/asklive'
 alias bp='atom ~/.bash_profile'
 
 # Git #
@@ -16,6 +18,7 @@ alias gc='git commit'
 alias gst='git stash save'
 alias gstp='git stash pop'
 alias gclean='git clean -d -f -i && git reset --hard'
+alias git-undo-last-commit='git reset --soft HEAD~1'
 
 # Helpers #
 alias o='open .'
