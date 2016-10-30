@@ -20,7 +20,9 @@ alias gclean='git clean -d -f -i && git reset --hard'
 # Helpers #
 alias o='open .'
 alias ip='ipconfig getifaddr en0 | (tr -d "\n" | pbcopy); ipconfig getifaddr en0; echo "Coppied to clipboard"'
-alias cl="clear && printf '\e[3J'"
+alias cl='clear && printf "\e[3J"'
+alias save-atom-package-list='apm list --installed --bare > atom-package-list.txt; echo "Atom package list saved to ./atom-package-list.txt"'
+alias install-atom-package-list='apm install --packages-file atom-package-list.txt; echo "Atom installed packages from ./atom-package-list.txt"'
 
 ## Custom Prompt ##
 parse_git_branch() {
