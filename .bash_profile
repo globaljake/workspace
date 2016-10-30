@@ -148,7 +148,9 @@ export PS1='${fggrn}$(parse_git_branch)${normal} \w ${fgred}✝${normal} '
 
 ## Auto Completion ##
 # Git #
-source ~/.git-completion.bash
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
 
 # Homebrew #
 if [ -f `brew --prefix`/etc/bash_completion ]; then
