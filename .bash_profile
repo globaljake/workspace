@@ -1,79 +1,41 @@
-## Colors ##
-fgblk="$(tput setaf 0)"     # Black - Regular
-fgred="$(tput setaf 1)"     # Red
-fggrn="$(tput setaf 2)"     # Green
-fgylw="$(tput setaf 3)"     # Yellow
-fgblu="$(tput setaf 4)"     # Blue
-fgpur="$(tput setaf 5)"     # Purple
-fgcyn="$(tput setaf 6)"     # Cyan
-fgwht="$(tput setaf 7)"     # White
-
-bfgblk="$(tput setaf 8)"    # Black - Bright
-bfgred="$(tput setaf 9)"    # Red
-bfggrn="$(tput setaf 10)"   # Green
-bfgylw="$(tput setaf 11)"   # Yellow
-bfgblu="$(tput setaf 12)"   # Blue
-bfgpur="$(tput setaf 13)"   # Purple
-bfgcyn="$(tput setaf 14)"   # Cyan
-bfgwht="$(tput setaf 15)"   # White
-
-bgblk="$(tput setab 0)"     # Black - Background
-bgred="$(tput setab 1)"     # Red
-bggrn="$(tput setab 2)"     # Green
-bgylw="$(tput setab 3)"     # Yellow
-bgblu="$(tput setab 4)"     # Blue
-bgpur="$(tput setab 5)"     # Purple
-bgcyn="$(tput setab 6)"     # Cyan
-bgwht="$(tput setab 7)"     # White
-
-bbgblk="$(tput setab 8)"    # Black - Background - Bright
-bbgred="$(tput setab 9)"    # Red
-bbggrn="$(tput setab 10)"   # Green
-bbgylw="$(tput setab 11)"   # Yellow
-bbgblu="$(tput setab 12)"   # Blue
-bbgpur="$(tput setab 13)"   # Purple
-bbgcyn="$(tput setab 14)"   # Cyan
-bbgwht="$(tput setab 15)"   # White
-
-normal="$(tput sgr0)"       # text reset
-mkbold="$(tput bold)"       # make bold
-undrln="$(tput smul)"       # underline
-noundr="$(tput rmul)"       # remove underline
-mkblnk="$(tput blink)"      # make blink
-revers="$(tput rev)"        # reverse
-
 ## Aliases and Functions ##
 # Shortcuts #
-alias d="cd ~/Desktop"
-alias @='cd ~/@'
-alias me='cd ~/@/me'
-alias temp='cd ~/@/temp'
-alias tsi='cd ~/@/tsi'
-alias al='cd ~/@/tsi/projects/asklive'
-alias bp='atom ~/.bash_profile'
+alias d='cd ~/Desktop';
+alias @='cd ~/@';
+alias me='cd ~/@/me';
+alias temp='cd ~/@/temp';
+alias tsi='cd ~/@/tsi';
+alias alcon='cd ~/@/tsi/common/connect/asklive';
+alias al='cd ~/@/tsi/projects/asklive';
+alias bp='atom ~/.bash_profile';
 
 # Git #
-alias gas='git add . && git status'
-alias gcm='git commit -m '
-alias gpr='git pull --rebase'
-alias gpo='git push origin'
-alias gs='git status'
-alias gc='git commit'
-alias gst='git stash save'
-alias gstp='git stash pop'
-alias gclean='git clean -d -f -i && git reset --hard'
-alias git-undo-last-commit='git reset --soft HEAD~1'
+alias gas='git add . && git status';
+alias gcm='git commit -m ';
+alias gpr='git pull --rebase';
+alias gpo='git push origin';
+alias gs='git status';
+alias gc='git commit';
+alias gst='git stash save';
+alias gstp='git stash pop';
+alias git-clean='git clean -d -f -i && git reset --hard';
+alias git-undo-last-commit='git reset --soft HEAD~1';
+
+# node / npm #
+alias nr='npm run ';
+alias ns='npm start';
 
 # Helpers #
-alias cd..="cd .."
-alias ..="cd .."
-alias o='open .'
-alias cl='clear && printf "\e[3J"'
-alias rmrf='rm -rf'
+alias cd..='cd ..';
+alias ..='cd ..';
+alias o='open .';
+alias a='atom .';
+alias cl='clear && printf "\e[3J"';
+alias rmrf='rm -rf';
 alias copy='tr -d "\n" | pbcopy'
-alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
-alias ip=myip
-
+alias psg='ps aux | grep -v grep | grep -i -e VSZ -e';
+alias ip=myip;
+#alias dns-flush-cache=sudo dscacheutil -flushcache;
 function myip {
   echo IP \(Private\): $(ipconfig getifaddr en0);
   echo IP \(Public\): $(curl -s http://ipecho.net/plain; echo);
@@ -84,8 +46,8 @@ function mcd {
     echo 'No name provided';
     echo 'Ex. mcd myNewDirectory';
   else
-    mkdir -p $1
-    cd $1
+    mkdir -p $1;
+    cd $1;
   fi
 }
 
@@ -141,28 +103,30 @@ fi
 
 ## Custom Prompt ##
 parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/'
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/';
 }
-
-export PS1='${fggrn}$(parse_git_branch)${normal} \w ${fgred}✝${normal} '
+export PS1="\[\033[32m\]\$(parse_git_branch)\[\033[00m\] \w \[\033[34m\]=>\[\033[00m\] "
 
 ## Auto Completion ##
 # Git #
 if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
+  . ~/.git-completion.bash;
 fi
 
 # Homebrew #
 if [ -f `brew --prefix`/etc/bash_completion ]; then
-    . `brew --prefix`/etc/bash_completion
+    . `brew --prefix`/etc/bash_completion;
 fi
 
 ## Environmental Variables ##
 # Android Development #
-export ANDROID_HOME=/Users/jakequattrocchi/Library/Android/sdk
-export ANDROID_NDK=~/Library/Android/ndk
+export ANDROID_HOME=/Users/jakequattrocchi/Library/Android/sdk;
+export ANDROID_NDK=~/Library/Android/ndk;
 
 # PATH #
 # TODO: organize PATH variable
-PATH="/usr/local/bin:/usr/local/tfs:$PATH"
+PATH=/usr/local/bin:/usr/local/tfs:$PATH;
 export PATH=${PATH}:/Users/jakequattrocchi/Library/Android/sdk/platform-tools:/Users/jakequattrocchi/Library/Android/sdk/tools
+export PATH="/usr/local/sbin:$PATH"
+
+export WMSJAVA_HOME="/Library/WowzaStreamingEngine-4.6.0/java"
