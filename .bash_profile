@@ -5,9 +5,11 @@ alias @='cd ~/@';
 alias me='cd ~/@/me';
 alias temp='cd ~/@/temp';
 alias tsi='cd ~/@/tsi';
-alias alcon='cd ~/@/tsi/common/connect/asklive';
-alias al='cd ~/@/tsi/projects/asklive';
+alias alcon='cd $AL_SERVERS';
+alias al='cd $AL_HOME';
 alias bp='atom ~/.bash_profile';
+alias refresh='source ~/.bash_profile';
+alias 1='cd $RECALL_PATH';
 
 # Git #
 alias gas='git add . && git status';
@@ -59,6 +61,20 @@ function atom-save-package-list {
     apm list --installed --bare > $1;
     echo Atom package list saved to $1;
   fi
+}
+onall () {
+  # http://stackoverflow.com/a/27515672
+    if [[ $1 == "--help" ]]; then
+        echo "Usage: onall <command>"
+        return 0
+    fi
+    osascript -e "tell application \"Terminal\"
+        repeat with w in windows
+            repeat with t in tabs of w
+                do script \"${1//\"/\\\"}\" in t
+            end repeat
+        end repeat
+    end tell" >/dev/null
 }
 
 function atom-install-package-list {
@@ -130,3 +146,14 @@ export PATH=${PATH}:/Users/jakequattrocchi/Library/Android/sdk/platform-tools:/U
 export PATH="/usr/local/sbin:$PATH"
 
 export WMSJAVA_HOME="/Library/WowzaStreamingEngine-4.6.0/java"
+
+export AL_HOME=~/@/tsi/projects/asklive
+export AL_SERVERS=~/@/tsi/common/connect/asklive
+
+function recall {
+  sed -i '' -e '$ d' ~/.bash_profile;
+  echo "export RECALL_PATH=$(pwd);" >> ~/.bash_profile;
+  onall refresh;
+}
+## DONT WRITE BELOW THIS POINT
+export RECALL_PATH=/Users/jakequattrocchi/@/tsi/projects/asklive/fblive;
